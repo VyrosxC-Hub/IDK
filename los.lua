@@ -1,44 +1,86 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/VyrosxC-Hub/IDK/refs/heads/main/ui.lua"))()
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/VyrosxC-Hub/IDK/refs/heads/main/ui.lua'))()
 
--- Criando a Janela
-local Window = Library:AddWindow("Preview", {
-	main_color = Color3.fromRGB(41, 74, 122),
-	min_size = Vector2.new(500, 600),
-	toggle_key = Enum.KeyCode.RightShift,
-	can_resize = true,
+
+
+local Window = Rayfield:CreateWindow({
+	Name = "Rayfield Example Window",
+	LoadingTitle = "Rayfield Interface Suite",
+	LoadingSubtitle = "by Sirius",
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = nil, -- Create a custom folder for your hub/game
+		FileName = "Big Hub"
+	},
+        Discord = {
+        	Enabled = false,
+        	Invite = "sirius", -- The Discord invite code, do not include discord.gg/
+        	RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+        },
+	KeySystem = true, -- Set this to true to use our key system
+	KeySettings = {
+		Title = "Sirius Hub",
+		Subtitle = "Key System",
+		Note = "Join the discord (discord.gg/sirius)",
+		FileName = "SiriusKey",
+		SaveKey = true,
+		GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+		Key = "Hello"
+	}
 })
 
--- Criando a Tab
-local Tab = Window:AddTab("Main Tab")
+local Tab = Window:CreateTab("Tab Example", 4483362458) -- Title, Image
 
--- Adicionando Botões
-Tab:AddButton("Say Hello", function()
-	print("Hello, World!")
-end)
+local Section = Tab:CreateSection("Section Example")
 
-Tab:AddButton("Execute Action", function()
-	print("Action Executed!")
-end)
+Rayfield:Notify({
+    Title = "Notification Title",
+    Content = "Notification Content",
+    Duration = 6.5,
+    Image = 4483362458,
+    Actions = { -- Notification Buttons
+        Ignore = {
+            Name = "Okay!",
+            Callback = function()
+                print("The user tapped Okay!")
+            end
+		},
+	},
+})
 
--- Adicionando Toggles
-local Toggle1 = Tab:AddSwitch("Enable Feature 1", function(state)
-	if state then
-		print("Feature 1 Enabled")
-	else
-		print("Feature 1 Disabled")
-	end
-end)
-Toggle1:Set(false) -- Define o estado inicial como desativado
+local Button = Tab:CreateButton({
+	Name = "Button Example",
+	Callback = function()
+		-- The function that takes place when the button is pressed
+	end,
+})
 
-local Toggle2 = Tab:AddSwitch("Enable Feature 2", function(state)
-	if state then
-		print("Feature 2 Enabled")
-	else
-		print("Feature 2 Disabled")
-	end
-end)
-Toggle2:Set(true) -- Define o estado inicial como ativado
+local Toggle = Tab:CreateToggle({
+	Name = "Toggle Example",
+	CurrentValue = false,
+	Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+		-- The function that takes place when the toggle is pressed
+    		-- The variable (Value) is a boolean on whether the toggle is true or false
+	end,
+})
+			
+local Input = Tab:CreateInput({
+	Name = "Input Example",
+	PlaceholderText = "Input Placeholder",
+	RemoveTextAfterFocusLost = false,
+	Callback = function(Text)
+	end,
+})
 
--- Mostrando a Tab e Formatando a Janela
-Tab:Show()
-Library:FormatWindows()
+local Dropdown = Tab:CreateDropdown({
+	Name = "Dropdown Example",
+	Options = {"Option 1","Option 2"},
+	CurrentOption = "Option 1",
+	Flag = "Dropdown1", 
+	Callback = function(Option)
+	end,
+})
+
+
+			
+Rayfield:Destroy()
