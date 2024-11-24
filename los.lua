@@ -1,68 +1,54 @@
-local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/VyrosxC-Hub/IDK/refs/heads/main/ui.lua'))()
+-- Carregando a biblioteca
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/VyrosxC-Hub/IDK/refs/heads/main/ui.lua", true))()
 
-local Window = Rayfield:CreateWindow({
-	Name = "VyrosxC Hub",
-	LoadingTitle = "Loading Script...",
-	LoadingSubtitle = "by VyrosxC",
-	ConfigurationSaving = {
-		Enabled = true,
-		FolderName = nil, -- Create a custom folder for your hub/game
-		FileName = "VyrosxC Hub"
+-- Criando a janela principal
+local Window = Library:CreateWindow("Main")
+
+-- Adicionando um botão
+Window:AddButton({
+    text = "Click Me", 
+    flag = "button_click", 
+    callback = function() 
+        print("Button pressed!") 
+    end
 })
 
-local Tab = Window:CreateTab("Tab Example", 4483362458) -- Title, Image
-
-local Section = Tab:CreateSection("Section Example")
-
-Rayfield:Notify({
-    Title = "Notification Title",
-    Content = "Notification Content",
-    Duration = 6.5,
-    Image = 4483362458,
-    Actions = { -- Notification Buttons
-        Ignore = {
-            Name = "Okay!",
-            Callback = function()
-                print("The user tapped Okay!")
-            end
-		},
-	},
+-- Adicionando um toggle
+Window:AddToggle({
+    text = "Enable Feature", 
+    flag = "toggle_feature", 
+    state = false, 
+    callback = function(state) 
+        print("Feature state:", state) 
+    end
 })
 
-local Button = Tab:CreateButton({
-	Name = "Button Example",
-	Callback = function()
-		-- The function that takes place when the button is pressed
-	end,
+-- Adicionando um campo de texto (TextBox)
+Window:AddBox({
+    text = "Enter Value", 
+    flag = "textbox_value", 
+    value = "Default", 
+    callback = function(value) 
+        print("Text entered:", value) 
+    end
 })
 
-local Toggle = Tab:CreateToggle({
-	Name = "Toggle Example",
-	CurrentValue = false,
-	Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-	Callback = function(Value)
-		-- The function that takes place when the toggle is pressed
-    		-- The variable (Value) is a boolean on whether the toggle is true or false
-	end,
-})
-			
-local Input = Tab:CreateInput({
-	Name = "Input Example",
-	PlaceholderText = "Input Placeholder",
-	RemoveTextAfterFocusLost = false,
-	Callback = function(Text)
-	end,
+-- Adicionando uma lista suspensa (List)
+Window:AddList({
+    text = "Choose Option", 
+    flag = "list_option", 
+    value = "Option 1", 
+    values = {"Option 1", "Option 2", "Option 3"}, 
+    callback = function(selected) 
+        print("Selected option:", selected) 
+    end
 })
 
-local Dropdown = Tab:CreateDropdown({
-	Name = "Dropdown Example",
-	Options = {"Option 1","Option 2"},
-	CurrentOption = "Option 1",
-	Flag = "Dropdown1", 
-	Callback = function(Option)
-	end,
-})
+-- Inicializando a biblioteca
+Library:Init()
 
-
-			
-Rayfield:Destroy()
+-- Exemplo para verificar os valores atuais após inicialização
+wait(5)
+print("Toggle state:", Library.flags["toggle_feature"])
+print("Textbox value:", Library.flags["textbox_value"])
+print("Selected list option:", Library.flags["list_option"])
