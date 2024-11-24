@@ -1,48 +1,74 @@
--- Carregando a biblioteca
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/VyrosxC-Hub/IDK/refs/heads/main/ui.lua", true))()
+-- Carregar o Rayfield Interface Suite
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/VyrosxC-Hub/IDK/refs/heads/main/ui.lua'))()
 
--- Criando a janela principal
-local Window = Library:CreateWindow("Main")
-
--- Adicionando um botão
-Window:AddButton({
-    text = "Click Me", 
-    flag = "button_click", 
-    callback = function() 
-        print("Button pressed!") 
-    end
+-- Configuração para salvar os dados e habilitar o KeySystem (opcional)
+local Window = Rayfield:CreateWindow({
+    Name = "Rayfield Example Window",
+    LoadingTitle = "Rayfield Interface Suite",
+    LoadingSubtitle = "by Sirius",
+    ConfigurationSaving = {
+        Enabled = true,
+        FolderName = nil, -- Deixe nil para a pasta padrão
+        FileName = "MainHub"
+    },
+    KeySystem = false, -- Altere para true se quiser ativar o sistema de chave
 })
 
--- Adicionando um toggle
-Window:AddToggle({
-    text = "Enable Feature", 
-    flag = "toggle_feature", 
-    state = false, 
-    callback = function(state) 
-        print("Feature state:", state) 
-    end
+-- Criar uma aba chamada "Main"
+local MainTab = Window:CreateTab("Main", 4483362458) -- Ícone padrão (opcional)
+
+-- Adicionar um botão
+MainTab:CreateButton({
+    Name = "Press Me",
+    Callback = function()
+        print("Button Pressed!")
+    end,
 })
 
--- Adicionando um campo de texto (TextBox)
-Window:AddBox({
-    text = "Enter Value", 
-    flag = "textbox_value", 
-    value = "Default", 
-    callback = function(value) 
-        print("Text entered:", value) 
-    end
+-- Adicionar um toggle
+MainTab:CreateToggle({
+    Name = "Enable Feature",
+    CurrentValue = false,
+    Flag = "FeatureToggle", -- Identificador para salvar a configuração
+    Callback = function(Value)
+        print("Feature is:", Value and "Enabled" or "Disabled")
+    end,
 })
 
--- Adicionando uma lista suspensa (List)
-Window:AddList({
-    text = "Choose Option", 
-    flag = "list_option", 
-    value = "Option 1", 
-    values = {"Option 1", "Option 2", "Option 3"}, 
-    callback = function(selected) 
-        print("Selected option:", selected) 
-    end
+-- Adicionar um campo de entrada (TextBox)
+MainTab:CreateInput({
+    Name = "Enter Text",
+    PlaceholderText = "Type something...",
+    RemoveTextAfterFocusLost = false,
+    Callback = function(Text)
+        print("Input received:", Text)
+    end,
 })
 
--- Inicializando a biblioteca
-Library:Init()
+-- Adicionar um menu suspenso (Dropdown)
+MainTab:CreateDropdown({
+    Name = "Choose an Option",
+    Options = {"Option 1", "Option 2", "Option 3"},
+    CurrentOption = "Option 1",
+    Flag = "DropdownChoice", -- Identificador para salvar a configuração
+    Callback = function(Option)
+        print("Selected option:", Option)
+    end,
+})
+
+-- Notificação de exemplo ao inicializar
+Rayfield:Notify({
+    Title = "Welcome",
+    Content = "Interface loaded successfully!",
+    Duration = 5,
+    Actions = {
+        Okay = {
+            Name = "Close",
+            Callback = function()
+                print("Notification dismissed.")
+            end,
+        },
+    },
+})
+
+Rayfield:Destroy()
