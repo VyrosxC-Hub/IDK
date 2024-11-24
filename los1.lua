@@ -1,4 +1,4 @@
-local library = pcall(loadstring(game:HttpGet("https://raw.githubusercontent.com/VyrosxC-Hub/IDK/refs/heads/main/ui.lua")))
+local _, library = pcall(loadstring(game:HttpGet("https://raw.githubusercontent.com/VyrosxC-Hub/IDK/refs/heads/main/ui.lua")))
 
 local window = library:CreateWindow("Osmium UI Library")
 
