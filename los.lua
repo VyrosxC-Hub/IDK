@@ -46,9 +46,3 @@ Window:AddList({
 
 -- Inicializando a biblioteca
 Library:Init()
-
--- Exemplo para verificar os valores atuais após inicialização
-wait(5)
-print("Toggle state:", Library.flags["toggle_feature"])
-print("Textbox value:", Library.flags["textbox_value"])
-print("Selected list option:", Library.flags["list_option"])
