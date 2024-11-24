@@ -1,74 +1,118 @@
 -- Carregar o Rayfield Interface Suite
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/VyrosxC-Hub/IDK/refs/heads/main/ui.lua'))()
 
--- Configuração para salvar os dados e habilitar o KeySystem (opcional)
 local Window = Rayfield:CreateWindow({
     Name = "Rayfield Example Window",
     LoadingTitle = "Rayfield Interface Suite",
     LoadingSubtitle = "by Sirius",
     ConfigurationSaving = {
-        Enabled = true,
-        FolderName = nil, -- Deixe nil para a pasta padrão
-        FileName = "MainHub"
+       Enabled = true,
+       FolderName = nil, -- Create a custom folder for your hub/game
+       FileName = "Big Hub"
     },
-    KeySystem = false, -- Altere para true se quiser ativar o sistema de chave
+    Discord = {
+       Enabled = false,
+       Invite = "SIRIUS", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD.
+       RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+    },
+    KeySystem = true, -- Set this to true to use our key system
+    KeySettings = {
+       Title = "KxnanTheDevs Script",
+       Subtitle = "Key System",
+       Note = "Join the discord)",
+       FileName = "SiriusKey",
+       SaveKey = true,
+       GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+       Key = "RICK ASTLEY"
+    }
+ })
+
+
+ -- ANTI-CHEAT BYPASSED
+
+ Rayfield:Notify({
+    Title = "Anti-Cheat bypassed",
+    Content = "We have bypassed the Anti-Cheat",
+    Duration = 6.5,
+    Image = 4483362458,
+    Actions = { -- Notification Buttons
+       Ignore = {
+          Name = "Okay!",
+          Callback = function()
+          print("The user tapped Okay!")
+       end
+    },
+ },
+ })
+
+
+ --TABS
+
+ local PlayerTab = Window:CreateTab("Player", 4483362458) -- Title, Image
+
+ local GamePlayTab = Window:CreateTab("GamePlay", 4483362458) -- Title, Image
+
+ 
+ --FUNCTIONS
+
+ local Slider = PlayerTab:CreateSlider({
+	Name = "WalkSpeed",
+	Range = {16, 10000},
+	Increment = 10,
+	Suffix = "WalkSpeed",
+	CurrentValue = 16,
+	Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(s)
+		game.Players.LocalPlayer.character.Humanoid.WalkSpeed = s
+	end,
 })
 
--- Criar uma aba chamada "Main"
-local Tab = Window:CreateTab("Tab Example", 4483362458) -- Title, Image
-
--- Adicionar um botão
-Tab:CreateButton({
-    Name = "Press Me",
-    Callback = function()
-        print("Button Pressed!")
+local Slider = PlayerTab:CreateSlider({
+    Name = "JumpPower",
+    Range = {0, 5000},
+    Increment = 10,
+    Suffix = "JumpPower",
+    CurrentValue = 10,
+    Flag = "Slider2", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(a)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
     end,
-})
+ })
 
--- Adicionar um toggle
-Tab:CreateToggle({
-    Name = "Enable Feature",
+
+ local Toggle = GamePlayTab:CreateToggle({
+    Name = "Toggle AutoSpeed/XP",
     CurrentValue = false,
-    Flag = "FeatureToggle", -- Identificador para salvar a configuração
+    Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
     Callback = function(Value)
-        print("Feature is:", Value and "Enabled" or "Disabled")
+        while wait() do
+            local args = {
+                [1] = "collectOrb",
+                [2] = "Red Orb",
+                [3] = "Magma City"
+            }
+            
+            game:GetService("ReplicatedStorage").rEvents.orbEvent:FireServer(unpack(args))
+            
+            
     end,
-})
+ })
 
--- Adicionar um campo de entrada (TextBox)
-Tab:CreateInput({
-    Name = "Enter Text",
-    PlaceholderText = "Type something...",
-    RemoveTextAfterFocusLost = false,
-    Callback = function(Text)
-        print("Input received:", Text)
+
+
+ local Toggle = GamePlayTab:CreateToggle({
+    Name = "Toggle AutoGem",
+    CurrentValue = false,
+    Flag = "Toggle2", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        while wait() do
+            local args = {
+                [1] = "collectOrb",
+                [2] = "Gem",
+                [3] = "Magma City"
+            }
+            
+            game:GetService("ReplicatedStorage").rEvents.orbEvent:FireServer(unpack(args))
+            
     end,
-})
-
--- Adicionar um menu suspenso (Dropdown)
-Tab:CreateDropdown({
-    Name = "Choose an Option",
-    Options = {"Option 1", "Option 2", "Option 3"},
-    CurrentOption = "Option 1",
-    Flag = "DropdownChoice", -- Identificador para salvar a configuração
-    Callback = function(Option)
-        print("Selected option:", Option)
-    end,
-})
-
--- Notificação de exemplo ao inicializar
-Rayfield:Notify({
-    Title = "Welcome",
-    Content = "Interface loaded successfully!",
-    Duration = 5,
-    Actions = {
-        Okay = {
-            Name = "Close",
-            Callback = function()
-                print("Notification dismissed.")
-            end,
-        },
-    },
-})
-
-Rayfield:Destroy()
+ })
