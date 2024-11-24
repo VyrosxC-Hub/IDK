@@ -15,10 +15,10 @@ local Window = Rayfield:CreateWindow({
 })
 
 -- Criar uma aba chamada "Main"
-local MainTab = Window:CreateTab("Main", 4483362458) -- Ícone padrão (opcional)
+local Tab = Window:CreateTab("Tab Example", 4483362458) -- Title, Image
 
 -- Adicionar um botão
-MainTab:CreateButton({
+Tab:CreateButton({
     Name = "Press Me",
     Callback = function()
         print("Button Pressed!")
@@ -26,7 +26,7 @@ MainTab:CreateButton({
 })
 
 -- Adicionar um toggle
-MainTab:CreateToggle({
+Tab:CreateToggle({
     Name = "Enable Feature",
     CurrentValue = false,
     Flag = "FeatureToggle", -- Identificador para salvar a configuração
@@ -36,7 +36,7 @@ MainTab:CreateToggle({
 })
 
 -- Adicionar um campo de entrada (TextBox)
-MainTab:CreateInput({
+Tab:CreateInput({
     Name = "Enter Text",
     PlaceholderText = "Type something...",
     RemoveTextAfterFocusLost = false,
@@ -46,7 +46,7 @@ MainTab:CreateInput({
 })
 
 -- Adicionar um menu suspenso (Dropdown)
-MainTab:CreateDropdown({
+Tab:CreateDropdown({
     Name = "Choose an Option",
     Options = {"Option 1", "Option 2", "Option 3"},
     CurrentOption = "Option 1",
