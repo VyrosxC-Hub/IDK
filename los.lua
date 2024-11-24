@@ -1,38 +1,41 @@
-local library = pcall(loadstring(game:HttpGet("https://raw.githubusercontent.com/VyrosxC-Hub/IDK/refs/heads/main/ui.lua")))
+local DarkLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/juywvm/ui-libs/main/Dark_Hub_Ui_Library/DarkHubUiLibrary"))() 
+local WindowOne = DarkLib:Window() -- Makes Window
 
-local window = library:CreateWindow("Osmium UI Library")
+local TabOne = WindowOne:Tab("Tab One") -- Makes Tab
+local TabTwo = WindowOne:Tab("Tab Twp") -- Makes Tab
+local TabThree = WindowOne:Tab("Tab Three") -- Makes Tab
+local TabFour = WindowOne:Tab("Tab Four") -- Makes Tab
+local TabFive = WindowOne:Tab("Tab Five") -- Makes Tab
+local TabSix = WindowOne:Tab("Tab Siz") -- Makes Tab
+local TabSeven = WindowOne:Tab("Tab Siz") -- Makes Tab
+local TabEight = WindowOne:Tab("Tab Siz") -- Makes Tab
 
-local test = window:CreateTab("Main")
-local info = window:CreateTab("Info")
-local cred = window:CreateTab("Credits")
 
-local dropdown = test:CreateDropdown("DropDown Exemple",{"Nami","Robin","Yamato"},function(val)
-	print(val)
-end)
 
-local label = test:CreateLabel("This is a Title","this is an exemple of description")
 
-local sld = test:CreateSlider("Slider Exemple",-100,100,function(arg)
-	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = arg
-end)
 
-test:CreateTextbox("TextBox Exemple", function(value)
-    print("Value = ", value)
-end, "Write Here")
 
-local toggle = test:CreateToggle("Toggle Exemple",false,function()
+TabOne:Button("Button", function() -- Makes Button
+    --Button
+    end)
     
-end)
+TabOne:Toggle("Toggle", function()
+    --Toggle
+    end)
+TabOne:Slider("Slider", 0, 50, function()
+    --Slider
+    end)
 
-local batp = test:CreateButton("Button Exemple", function()
-    print("c")
-end)
 
-local label = info:CreateLabel("KeyBind :","KeyBind to Close/Open the Gui Is 'Left Alt'")
 
-local label = cred:CreateLabel("Interface :","Made by Trix#2794")
-local label = cred:CreateLabel("Interface Scripts :","Made by Trix#2794")
-local label = cred:CreateLabel("Scripting :","by Trix#2794 / JulMan#1234")
-local batp = cred:CreateButton("Copy Discord Server Link", function()
-    setclipboard("discord.gg/TT3y4gkJtq")
-end)
+--TabOne:Colorpicker("Color Picker", preset, callback)
+
+TabOne:Textbox("Text Box", "disapper", function()
+    --Text Box
+    end)
+
+TabOne:Label("Label")
+    
+TabOne:Dropdown("DropDown", list, callback)
+
+TabOne:Keybind("KeyBind", key, callback)
