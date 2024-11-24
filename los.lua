@@ -1,38 +1,53 @@
-local Flux = loadstring(game:HttpGet"https://raw.githubusercontent.com/VyrosxC-Hub/IDK/refs/heads/main/ui.lua")()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/VyrosxC-Hub/IDK/refs/heads/main/ui.lua", true))()
 
-local win = Flux:Window("PREVIEW", "Baseplate", Color3.fromRGB(255, 110, 48), Enum.KeyCode.LeftControl)
+-- Criar uma janela principal
+local Window = Library:CreateWindow("Main Window")
 
-local tab = win:Tab("Tab 1", "http://www.roblox.com/asset/?id=6023426915")
+-- Adicionar uma pasta (opcional para organizar)
+local Folder = Window:AddFolder("Main")
 
-tab:Button("Kill all", "This function may not work sometimes and you can get banned.", function()
-Flux:Notification("Killed all players successfully!", "Alright")
-end)
+-- Adicionar um rótulo (label)
+Folder:AddLabel({text = "Bem-vindo à Interface"})
 
-tab:Label("This is just a label.")
-tab:Line()
+-- Adicionar um botão
+Folder:AddButton({
+    text = "Clique Aqui",
+    flag = "button",
+    callback = function()
+        print("Botão clicado!")
+    end
+})
 
-tab:Toggle("Auto-Farm Coins", "Automatically collects coins for you!", function(t)
-print(t)
-end)
+-- Adicionar um toggle
+Folder:AddToggle({
+    text = "Ativar Função",
+    flag = "toggle_function",
+    state = false,
+    callback = function(state)
+        print("Função está:", state and "Ativada" or "Desativada")
+    end
+})
 
-tab:Slider("Walkspeed", "Makes your faster.", 0, 100,16,function(t)
-print(t)
-end)
+-- Adicionar um TextBox
+Folder:AddBox({
+    text = "Digite algo",
+    flag = "textbox_input",
+    value = "Texto padrão",
+    callback = function(input)
+        print("Texto digitado:", input)
+    end
+})
 
-tab:Dropdown("Part to aim at", {"Torso","Head","Penis"}, function(t)
-print(t)
-end)
+-- Adicionar uma lista suspensa (List)
+Folder:AddList({
+    text = "Selecione uma Opção",
+    flag = "option_list",
+    value = "Opção 1",
+    values = {"Opção 1", "Opção 2", "Opção 3"},
+    callback = function(selected)
+        print("Opção selecionada:", selected)
+    end
+})
 
-tab:Colorpicker("ESP Color", Color3.fromRGB(255,1,1), function(t)
-print(t)
-end)
-
-tab:Textbox("Gun Power", "This textbox changes your gun power, so you can kill everyone faster and easier.", true, function(t)
-print(t)
-end)
-
-tab:Bind("Kill Bind", Enum.KeyCode.Q, function()
-print("Killed a random person!")
-end)
-
-win:Tab("Tab 2", "http://www.roblox.com/asset/?id=6022668888")
+-- Inicializar a biblioteca
+Library:Init()
