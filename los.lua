@@ -1,6 +1,6 @@
 --// Functions \\--
 
--- Function PlayerInfo 
+-- Function Player Info
 local function UpdatePlayerStats()
     local player = game.Players.LocalPlayer
     local userID = player.UserId
@@ -17,6 +17,22 @@ game:GetService("RunService").Heartbeat:Connect(function()
 end)
 
 
+
+-- Function Main
+local function ExpandTorso()
+ 
+end
+
+local function ResetCharacter()
+   
+end
+
+local function setPlayerStats(walkSpeed, jumpPower)
+    local player = game.Players.LocalPlayer
+    local humanoid = player.Character.Humanoid
+    humanoid.WalkSpeed = walkSpeed
+    humanoid.JumpPower = jumpPower
+end
 
 --// VyrosxC Hub \\--
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/VyrosxC-Hub/IDK/refs/heads/main/ui.lua'))()
@@ -64,54 +80,54 @@ local KeyLabel = PlayerInfoSection:Label({
 })
 
 -- ============================
--- Seção: Configurações Gerais
+-- Seção: Configurações do Jogador
 -- ============================
-local MainSection = MainTab:Section({ Text = "Main" })
+local PlayerSettingsSection = MainTab:Section({ Text = "Player Settings" })
 
-MainSection:Toggle({ Text = "Enabled" })
-MainSection:Toggle({ Text = "Wall Check" })
-MainSection:Toggle({ Text = "Smooth Aimbot" })
-
-MainSection:Dropdown({
-    Text = "Dropdown",
-    List = {"Head", "Torso", "Random"},
-    Flag = "Choosen",
-    Callback = function(v)
-        warn(v)
-    end
-})
-
-MainSection:RadioButton({
-    Text = "RadioButton",
-    Options = {"Legit", "Blatant"},
-    Callback = function(v)
-        warn(v)
-    end
-})
-
-MainSection:Toggle({ Text = "Silent Aimbot" })
-
-MainSection:Input({
-    Placeholder = "Webhook URL",
-    Flag = "URL"
-})
-
-MainSection:Keybind({
-    Default = Enum.KeyCode.E,
-    Text = "Aimbot Key",
+PlayerSettingsSection:Button({
+    Text = "Expand Torso", 
     Callback = function()
-        warn("Pressed")
+        ExpandTorso() 
+        print("Successfully expanded torso!")
+    end    
+})
+
+PlayerSettingsSection:Button({
+    Text = "Reset Character", 
+    Callback = function()
+        ResetCharacter() 
+        print("The character has been reset to normal size!")
+    end    
+})
+
+-- ============================
+-- Seção: Configurações de Velocidade e Salto
+-- ============================
+PlayerSettingsSection:Textbox({
+    Text = "Walk Speed",
+    Default = "500",
+    Callback = function(value)
+        local newWalkSpeed = tonumber(value)
+        if newWalkSpeed then
+            local currentJumpPower = game.Players.LocalPlayer.Character.Humanoid.JumpPower
+            setPlayerStats(newWalkSpeed, currentJumpPower)
+        else
+            print("Invalid value for WalkSpeed.")
+        end
     end
 })
 
-MainSection:Slider({
-    Text = "Slider Test",
-    Default = 5,
-    Minimum = 0,
-    Maximum = 50,
-    Flag = "SliderFlag",
-    Callback = function(v)
-        warn(v)
+PlayerSettingsSection:Textbox({
+    Text = "Jump Power",
+    Default = "200",
+    Callback = function(value)
+        local newJumpPower = tonumber(value)
+        if newJumpPower then
+            local currentWalkSpeed = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed
+            setPlayerStats(currentWalkSpeed, newJumpPower)
+        else
+            print("Invalid value for JumpPower.")
+        end
     end
 })
 
@@ -149,9 +165,3 @@ MainTab:Select()
 wait(5)
 
 NoRecoilToggle:Set(true)
-
--- Atualizar o texto do label
-PlayerInfoSection:Label({
-    Text = "This is a red label.",
-    Color = Color3.fromRGB(217, 97, 99)
-})
