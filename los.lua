@@ -1,135 +1,73 @@
+-- Carregar a biblioteca
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/VyrosxC-Hub/IDK/refs/heads/main/ui.lua'))()
 local Flags = Library.Flags
 
+-- Criar a janela principal
 local Window = Library:Window({
     Text = "VyrosxC Hub | Legends Of Speed ⚡"
 })
 
-local Tab = Window:Tab({
-    Text = "Main"
-})
+-- Criar abas
+local MainTab = Window:Tab({ Text = "Main" })
+local TeleportsTab = Window:Tab({ Text = "Teleports" })
 
-local Tab2 = Window:Tab({
-    Text = "Teleports"
-})
+-- ============================
+-- Seção: Informações do Jogador
+-- ============================
+local PlayerInfoSection = MainTab:Section({ Text = "Player Info" })
 
-local ChamsSection = Tab2:Section({
-    Text = "Chams"
-})
-
-local Section = Tab:Section({
-    Text = "Aimbot"
-})
-
-local Section2 = Tab:Section({
-    Text = "FOV"
-})
-
-local Section3 = Tab:Section({
-    Text = "Misc",
-    Side = "Right"
-})
-
-ChamsSection:Toggle({
-    Text = "Enabled"
-})
-
-ChamsSection:Toggle({
-    Text = "Color"
-})
-
-ChamsSection:Toggle({
-    Text = "Filled"
-})
-
-ChamsSection:Toggle({
-    Text = "Team Check"
-})
-
-Section:Toggle({
-    Text = "Enabled"
-})
-
-Section:Toggle({
-    Text = "Wall Check"
-})
-
-Section:Toggle({
-    Text = "Smooth Aimbot"
-})
-
-Section2:Toggle({
-    Text = "Enabled"
-})
-
-Section2:Toggle({
-    Text = "Filled FOV"
-})
-
-Section2:Toggle({
-    Text = "FOV Transparency",
-    Tooltip = "Changes your fov transparency."
-})
-
-Section2:Button({
-    Text = "Reset FOV",
-    Tooltip = "This resets your aimbot fov."
-})
-
-Section3:Toggle({
-    Text = "Infinite Ammo"
-})
-
-Section3:Toggle({
-    Text = "No Spread"
-})
-
-Section3:Toggle({
-    Text = "No Bullet Drop",
-    Default = true
-})
-
-Section3:Toggle({
-    Text = "Full Auto"
-})
-
-local a = Section3:Toggle({
-    Text = "No Recoil"
-})
-
-local label = Section3:Label({
-    Text = "This is a label.",
+PlayerInfoSection:Label({
+    Text = "UserID:",
     Color = Color3.fromRGB(217, 97, 99),
-    Tooltip = "This is a label."
+    Tooltip = "Player UserID"
 })
 
-local dropdown = Section:Dropdown({
+PlayerInfoSection:Label({
+    Text = "Status:",
+    Color = Color3.fromRGB(217, 97, 99),
+    Tooltip = "Player Status"
+})
+
+PlayerInfoSection:Label({
+    Text = "Key:",
+    Color = Color3.fromRGB(217, 97, 99),
+    Tooltip = "Player Key"
+})
+
+-- ============================
+-- Seção: Configurações Gerais
+-- ============================
+local MainSection = MainTab:Section({ Text = "Main" })
+
+MainSection:Toggle({ Text = "Enabled" })
+MainSection:Toggle({ Text = "Wall Check" })
+MainSection:Toggle({ Text = "Smooth Aimbot" })
+
+MainSection:Dropdown({
     Text = "Dropdown",
-    List = {"Head","Torso","Random"},
+    List = {"Head", "Torso", "Random"},
     Flag = "Choosen",
     Callback = function(v)
         warn(v)
     end
 })
 
-Section:RadioButton({
+MainSection:RadioButton({
     Text = "RadioButton",
-    Options = {"Legit","Blatant"},
+    Options = {"Legit", "Blatant"},
     Callback = function(v)
         warn(v)
     end
 })
 
-Section:Toggle({
-    Text = "Silent Aimbot"
-})
+MainSection:Toggle({ Text = "Silent Aimbot" })
 
-Section:Input({
+MainSection:Input({
     Placeholder = "Webhook URL",
     Flag = "URL"
 })
 
-Section:Keybind({
+MainSection:Keybind({
     Default = Enum.KeyCode.E,
     Text = "Aimbot Key",
     Callback = function()
@@ -137,7 +75,7 @@ Section:Keybind({
     end
 })
 
-Section:Slider({
+MainSection:Slider({
     Text = "Slider Test",
     Default = 5,
     Minimum = 0,
@@ -148,16 +86,49 @@ Section:Slider({
     end
 })
 
-Tab:Select()
-
-wait(5)
-
---[[dropdown:Refresh({
-    List = {"Head", "Feet"}
-})--]]
-
-label:Set({
-    Text = "This is a red label."
+-- ============================
+-- Seção: Configurações Avançadas
+-- ============================
+local MiscSection = MainTab:Section({
+    Text = "Misc",
+    Side = "Right"
 })
 
-a:Set(true)
+MiscSection:Toggle({ Text = "Infinite Ammo" })
+MiscSection:Toggle({ Text = "No Spread" })
+MiscSection:Toggle({ Text = "No Bullet Drop", Default = true })
+MiscSection:Toggle({ Text = "Full Auto" })
+
+local NoRecoilToggle = MiscSection:Toggle({ Text = "No Recoil" })
+
+MiscSection:Label({
+    Text = "This is a label.",
+    Color = Color3.fromRGB(217, 97, 99),
+    Tooltip = "This is a label."
+})
+
+-- ============================
+-- Seção: Chams (Aparências)
+-- ============================
+local ChamsSection = MainTab:Section({ Text = "Chams" })
+
+ChamsSection:Toggle({ Text = "Enabled" })
+ChamsSection:Toggle({ Text = "Color" })
+ChamsSection:Toggle({ Text = "Filled" })
+ChamsSection:Toggle({ Text = "Team Check" })
+
+-- ============================
+-- Configuração de Inicialização
+-- ============================
+MainTab:Select()
+
+-- Atualização de elementos após 5 segundos
+wait(5)
+
+NoRecoilToggle:Set(true)
+
+-- Atualizar o texto do label
+PlayerInfoSection:Label({
+    Text = "This is a red label.",
+    Color = Color3.fromRGB(217, 97, 99)
+})
