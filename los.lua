@@ -130,12 +130,6 @@ MiscSection:Toggle({ Text = "Full Auto" })
 
 local NoRecoilToggle = MiscSection:Toggle({ Text = "No Recoil" })
 
-MiscSection:Label({
-    Text = "This is a label.",
-    Color = Color3.fromRGB(217, 97, 99),
-    Tooltip = "This is a label."
-})
-
 -- ============================
 -- Seção: Chams (Aparências)
 -- ============================
