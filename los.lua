@@ -1,36 +1,65 @@
--- Carregar a biblioteca
+--// Functions \\--
+
+-- Function PlayerInfo 
+local function UpdatePlayerStats()
+    local player = game.Players.LocalPlayer
+    local userID = player.UserId
+    local playerStatus = "Online" 
+    local playerKey = "Valid ✅"  
+    
+    UserIDLabel:Set({ Text = "UserID: " .. userID })
+    StatusLabel:Set({ Text = "Status: " .. playerStatus })
+    KeyLabel:Set({ Text = "Key: " .. playerKey })
+end
+
+game:GetService("RunService").Heartbeat:Connect(function()
+    UpdatePlayerStats()
+end)
+
+
+
+--// VyrosxC Hub \\--
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/VyrosxC-Hub/IDK/refs/heads/main/ui.lua'))()
 local Flags = Library.Flags
 
--- Criar a janela principal
+-- Window 
 local Window = Library:Window({
     Text = "VyrosxC Hub | Legends Of Speed ⚡"
 })
 
--- Criar abas
+-- Tabs
 local MainTab = Window:Tab({ Text = "Main" })
 local TeleportsTab = Window:Tab({ Text = "Teleports" })
+local AutoFarmTab = Window:Tab({ Text = "Auto Farm" })
+local StatsTab = Window:Tab({ Text = "Stats" })
+local AutoRebirthTab = Window:Tab({ Text = "Auto Rebirth" })
+local AutoRaceTab = Window:Tab({ Text = "Auto Race" })
+local PCExploitsTab = Window:Tab({ Text = "PC Exploits" })
+local ChatSpamTab = Window:Tab({ Text = "Chat Spam" })
+local RebirthsTab = Window:Tab({ Text = "Rebirths" })
+local ExtraTab = Window:Tab({ Text = "Extra" })
+local CreditsTab = Window:Tab({ Text = "Credits" })
 
 -- ============================
 -- Seção: Informações do Jogador
 -- ============================
 local PlayerInfoSection = MainTab:Section({ Text = "Player Info" })
 
-PlayerInfoSection:Label({
-    Text = "UserID:",
-    Color = Color3.fromRGB(217, 97, 99),
+local UserIDLabel = PlayerInfoSection:Label({
+    Text = "UserID: " .. game.Players.LocalPlayer.UserId,
+    Color = Color3.fromRGB(0, 255, 0), 
     Tooltip = "Player UserID"
 })
 
-PlayerInfoSection:Label({
-    Text = "Status:",
-    Color = Color3.fromRGB(217, 97, 99),
+local StatusLabel = PlayerInfoSection:Label({
+    Text = "Status: Online",
+    Color = Color3.fromRGB(0, 255, 0), 
     Tooltip = "Player Status"
 })
 
-PlayerInfoSection:Label({
-    Text = "Key:",
-    Color = Color3.fromRGB(217, 97, 99),
+local KeyLabel = PlayerInfoSection:Label({
+    Text = "Key: Valid ✅",
+    Color = Color3.fromRGB(0, 255, 0),
     Tooltip = "Player Key"
 })
 
